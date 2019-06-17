@@ -52,7 +52,7 @@ cargo build ${CARGO_BUILD_FLAGS:-"--release"}
 #if [[ -z "$START_COMMAND" ]]; then
 APP=$(echo $VCAP_APPLICATION | tr ',' '\n' | grep "application_name")
 APP=$(echo $APP | cut -d':' -f2 | tr -d '"')
-START_COMMAND="ROCKET_PORT=$PORT ./target/release/$APP"
+START_COMMAND="./target/release/$APP"
 #fi
 
 # Modify the bin/release script with the start command
