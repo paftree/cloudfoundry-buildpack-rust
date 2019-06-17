@@ -49,11 +49,11 @@ cd "$build"
 cargo build ${CARGO_BUILD_FLAGS:-"--release"}
 
 # Determine a default start command
-if [[ -z "$START_COMMAND" ]]; then
-    APP=$(echo $VCAP_APPLICATION | tr ',' '\n' | grep "application_name")
-    APP=$(echo $APP | cut -d':' -f2 | tr -d '"')
-    START_COMMAND="./target/release/$APP"
-fi
+#if [[ -z "$START_COMMAND" ]]; then
+APP=$(echo $VCAP_APPLICATION | tr ',' '\n' | grep "application_name")
+APP=$(echo $APP | cut -d':' -f2 | tr -d '"')
+START_COMMAND="./target/release/$APP"
+#fi
 
 # Modify the bin/release script with the start command
 sed -i "s@web: EMPTY@web: $START_COMMAND@" $bpdir/bin/release
